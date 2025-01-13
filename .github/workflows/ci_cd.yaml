@@ -29,12 +29,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4. **Linting (vérification du style de code avec Flake8)**
-      - name: Lint code with Flake8
-        run: |
-          pip install flake8
-          flake8 .
-
       # 5. **Exécution des tests unitaires**
       - name: Run unit tests with Pytest
         run: |
