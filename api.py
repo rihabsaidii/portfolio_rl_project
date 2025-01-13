@@ -3,7 +3,7 @@ import json
 from flask import Flask, request, jsonify
 
 # Paths and Data Loading
-DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data'))
+DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '', 'data'))
 # Load optimal weights
 optimal_weights_path = os.path.join(DATA_DIR, 'optimal_weights.json')
 if os.path.exists(optimal_weights_path):
