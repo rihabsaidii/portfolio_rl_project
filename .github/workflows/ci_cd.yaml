@@ -1,0 +1,51 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. **Vérification du code source**
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      # 2. **Configuration de Python**
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      # 3. **Installation des dépendances**
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4. **Linting (vérification du style de code avec Flake8)**
+      - name: Lint code with Flake8
+        run: |
+          pip install flake8
+          flake8 .
+
+      # 5. **Exécution des tests unitaires**
+      - name: Run unit tests with Pytest
+        run: |
+          pip install pytest
+          pytest --cov=./
+
+      # 6. **Déploiement (optionnel)**
+      - name: Deploy to production
+        if: github.ref == 'refs/heads/main' && success()
+        run: |
+          echo "Deploying application..."
+          # Commandes de déploiement, par exemple :
+          # ssh user@server "cd /path/to/app && git pull && systemctl restart app"
+
