@@ -6,4 +6,5 @@ flask
 scipy
 gunicorn
 dash
+dash-bootstrap-components
 
