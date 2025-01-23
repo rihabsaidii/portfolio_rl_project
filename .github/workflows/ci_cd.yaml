@@ -25,7 +25,7 @@ jobs:
 
       # 3. Ajouter le répertoire racine au PYTHONPATH
       - name: Set PYTHONPATH
-        run: echo "::add-path::$(pwd)"
+        run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
 
       # 4. Installation des dépendances
       - name: Install dependencies
@@ -44,4 +44,3 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' && success() }}
         run: |
           echo "Deploying application..."
-
