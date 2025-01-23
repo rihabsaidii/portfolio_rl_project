@@ -2,8 +2,10 @@ import os
 import json
 import unittest
 
+
+# Corriger la base du répertoire pour qu'elle pointe vers la racine du projet
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 # Définir les chemins des fichiers JSON
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BEST_PARAMS_FILE = os.path.join(BASE_DIR, "data", "best_params.json")
 OPTIMAL_WEIGHTS_FILE = os.path.join(BASE_DIR, "data", "optimal_weights.json")
 COMPARISON_RESULTS_FILE = os.path.join(BASE_DIR, "data", "comparison_results.json")
@@ -51,3 +53,4 @@ class TestJSONFiles(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
