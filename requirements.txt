@@ -3,4 +3,5 @@ numpy==1.25.2
 plotly==5.17.0
 yfinance==0.2.50
 flask
+scipy
 
