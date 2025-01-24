@@ -12,9 +12,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # 5. Copier tout le contenu du dossier dashboards dans /app
 COPY . .
+COPY data /app/data
 
 # Exposer le port utilisé par l'application Dash
-EXPOSE 8050
+#EXPOSE 8050
 
 # 6. Commande par défaut pour lancer l'application
 #CMD ["python", "app.py"]
