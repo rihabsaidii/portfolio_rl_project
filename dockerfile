@@ -18,4 +18,4 @@ EXPOSE 8050
 
 # 6. Commande par défaut pour lancer l'application
 #CMD ["python", "app.py"]
-CMD ["gunicorn", "-b", "0.0.0.0:8050", "app:server"]
+CMD ["gunicorn", "-b", "0.0.0.0:8050", "app:app"]
