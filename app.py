@@ -42,6 +42,8 @@ available_combinations = list(optimal_weights.keys())
 
 # Initialize Dash App
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+# Accès au serveur Flask sous-jacent
+server = app.server  # Cela permet à Gunicorn d'accéder au serveur WSGI.
 
 # Navbar
 navbar = dbc.Navbar(
@@ -214,4 +216,4 @@ def calculate_metrics(selected_stocks):
     )
 
 if __name__ == '__main__':
-    app.run_server(debug=True, host='0.0.0.0', port=8050)
+    app.run_server(debug=True, host="0.0.0.0", port=8050)

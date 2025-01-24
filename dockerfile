@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # 6. Commande par défaut pour lancer l'application
-CMD ["python", "api.py"]
+CMD ["python", "app.py"]
