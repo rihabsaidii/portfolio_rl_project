@@ -174,7 +174,7 @@ def display_pie_chart(selected_stocks):
     selected_combination_str = ','.join(selected_stocks_sorted)
 
     if selected_combination_str in optimal_weights:
-        weights = optimal_weights[selected_combination_str]["best_weights"]
+        weights = optimal_weights[selected_combination_str]
         return px.pie(names=selected_stocks_sorted, values=weights, title='Optimal weights')
 
     return px.pie(names=['Aucune sélection'], values=[1], title='Veuillez sélectionner une combinaison valide')
@@ -194,7 +194,7 @@ def calculate_metrics(selected_stocks):
     if selected_stocks_sorted not in optimal_weights:
         return "Pas de poids disponibles", "Pas de poids disponibles", "Pas de poids disponibles"
 
-    weights = np.array(optimal_weights[selected_stocks_sorted]['best_weights'])
+    weights = np.array(optimal_weights[selected_stocks_sorted])
     df = pd.DataFrame({stock: returns_df[stock] for stock in selected_stocks})
     mean_returns = df.mean()
     cov_matrix = df.cov()
@@ -214,4 +214,4 @@ def calculate_metrics(selected_stocks):
     )
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=True, host='0.0.0.0', port=8050)
