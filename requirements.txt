@@ -7,4 +7,5 @@ scipy
 gunicorn
 dash
 dash-bootstrap-components
+waitress
 
