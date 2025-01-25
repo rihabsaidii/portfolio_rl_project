@@ -7,7 +7,7 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html, Input, Output
 import plotly.express as px
 import plotly.graph_objects as go
-from waitress import serve
+# from waitress import serve
 
 # Paths and Data Loading
 DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '', 'data'))
@@ -217,6 +217,6 @@ def calculate_metrics(selected_stocks):
     )
 
 if __name__ == '__main__':
-    # app.run_server(debug=True)
-    serve(app.server, host="0.0.0.0", port=8050)
+    app.run_server(debug=True)
+    # serve(app.server, host="0.0.0.0", port=8050)
 

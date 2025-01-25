@@ -1,0 +1,10 @@
+__pycache__
+.git
+.vscode
+*.log
+node_modules
+tests/
+*.DS_Store
+*.pkl  # si tu as des modèles entraînés, les modèles peuvent être stockés ailleurs
+
+
