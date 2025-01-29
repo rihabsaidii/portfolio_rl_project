@@ -1,40 +1,3 @@
-# import yfinance as yf
-# import os
-# import csv
-#
-#
-# def fetch_data(symbols, start_date, end_date, interval='1d'):
-#     """
-#     Collecte les données ajustées de clôture depuis Yahoo Finance.
-#     """
-#     data = {}
-#     for symbol in symbols:
-#         ticker = yf.Ticker(symbol)
-#         # Récupérer les données dans un format brut
-#         raw_data = ticker.history(start=start_date, end=end_date, interval=interval)
-#
-#         # Convertir les données brutes en dictionnaire de dates et de prix ajustés
-#         adjusted_close = {}
-#         for date, row in raw_data.iterrows():
-#             adjusted_close[date.strftime('%Y-%m-%d')] = row['Adj Close']
-#
-#         data[symbol] = adjusted_close
-#     return data
-#
-#
-# def save_data(data, output_dir):
-#     """
-#     Sauvegarder les données dans des fichiers CSV.
-#     """
-#     os.makedirs(output_dir, exist_ok=True)
-#     for symbol, symbol_data in data.items():
-#         file_path = os.path.join(output_dir, f'{symbol}_adjusted_close.csv')
-#         with open(file_path, mode='w', newline='') as file:
-#             writer = csv.writer(file)
-#             writer.writerow(["Date", "Adjusted Close"])
-#             for date, adj_close in symbol_data.items():
-#                 writer.writerow([date, adj_close])
-#         print(f'Données sauvegardées pour {symbol} dans {file_path}')
 import yfinance as yf
 import os
 import csv
@@ -80,12 +43,5 @@ def save_data(data, output_dir):
 
     # Versionner avec DVC
     os.system(f"dvc add {file_path}")
-    os.system("git add data/raw.dvc")
-    os.system("git commit -m 'Mise à jour des données'")
-
-assets = ["AAPL", "PG", "XOM"]
-start_date = "2022-01-01"
-end_date = "2025-01-01"
-interval = "1d"
-data = fetch_data(assets, start_date, end_date, interval)
-print(data)
+    os.system("git add data/raw/market_data.csv.dvc")
+    os.system('git commit -m "Update market data"')
