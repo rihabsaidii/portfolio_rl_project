@@ -1,3 +1,37 @@
-.vercel
+# Ignorer le répertoire venv
 venv/
+
+# Ignorer le répertoire aiflow
+airflow_venv/
+
+# Ignorer les fichiers Python compilés
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignorer les fichiers de configuration IDE courants
+.vscode/
+.idea/
+
+# Ignorer les fichiers de logs
+*.log
+
+# Ignorer les fichiers de données temporaires
+*.bak
+*.swp
+
+# Ignorer les fichiers de cache
+*.cache
+.cache/
+
+# Ignorer le fichier de configuration d'environnement virtuel
+Pipfile.lock
+
+# Ignorer les fichiers de système macOS
+.DS_Store
+
+# Ignorer les fichiers système Windows
+Thumbs.db
+ehthumbs.db
+_-
 
