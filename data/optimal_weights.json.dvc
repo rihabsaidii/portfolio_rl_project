@@ -1,0 +1,5 @@
+outs:
+- md5: 8e9f034ee030e741611d1c6f49ff6134
+  size: 297
+  hash: md5
+  path: optimal_weights.json

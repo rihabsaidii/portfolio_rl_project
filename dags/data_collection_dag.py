@@ -4,7 +4,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 
 # Ajouter le chemin vers le dossier 'dags' où se trouve 'scripts'
-sys.path.insert(0, '/home/rihab/airflow/dags')
+# sys.path.insert(0, '/home/rihab/airflow/dags')
 
 # Importer les fonctions de 'scripts/data_collection'
 from scripts.data_collection import fetch_data, save_data

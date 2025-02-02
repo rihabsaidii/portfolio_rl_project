@@ -1,0 +1,5 @@
+outs:
+- md5: 1bf815cc7bcbde7daa0763d18b2645a9
+  size: 1432
+  hash: md5
+  path: comparison_results.json
