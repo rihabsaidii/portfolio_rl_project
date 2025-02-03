@@ -388,15 +388,15 @@ def run_optimization(returns):
         mean_returns = subset_returns.mean()
         cov_matrix = subset_returns.cov()
 
-        # ✅ Q-Learning Optimization
+        # Q-Learning Optimization
         best_params = optimize_hyperparameters(mean_returns, cov_matrix, 50)
         agent = PortfolioAgent(len(combination), **best_params)
         best_sharpe_q, best_weights_q, _ = train(agent, mean_returns, cov_matrix)
 
-        # ✅ Markowitz Optimization
+        # Markowitz Optimization
         markowitz_results = markowitz.optimize_portfolio(mean_returns, cov_matrix)
 
-        # 🔄 Comparaison des résultats
+        # Comparaison des résultats
         comparison_results[','.join(combination)] = {
             "Q-Learning": {
                 "sharpe_ratio": best_sharpe_q,
@@ -428,52 +428,52 @@ def run_optimization(returns):
     # os.system("git add .")  # Ajoute les fichiers DVC ajoutés et les changements Git
     # os.system("git commit -m 'Ajout des résultats optimaux et comparatifs dans DVC'")  # Commit des fichiers
     # os.system("dvc push")  # Pousse les fichiers vers le remote DVC
-    # print("✅ Résultats sauvegardés dans DVC.")
+    # print("Résultats sauvegardés dans DVC.")
     # print("🏁 Comparaison Markowitz vs Q-Learning terminée avec succès.")
 
 import os
 
-# 📌 Liste des fichiers à gérer dans DVC
+#Liste des fichiers à gérer dans DVC
 files = [COMPARISON_RESULTS_FILE, RESULTS_FILE, WEIGHTS_FILE]
 
-# ✅ Vérifier si les fichiers existent
+#Vérifier si les fichiers existent
 missing_files = [file for file in files if not os.path.exists(file)]
 if missing_files:
-    print(f"⚠️ Erreur : Les fichiers suivants n'existent pas et ne peuvent pas être ajoutés à DVC : {missing_files}")
+    print(f"Erreur : Les fichiers suivants n'existent pas et ne peuvent pas être ajoutés à DVC : {missing_files}")
     exit(1)
 
-# ✅ Vérifier si les fichiers sont déjà suivis par DVC
+# Vérifier si les fichiers sont déjà suivis par DVC
 tracked_files = os.popen("dvc list --dvc-only").read().splitlines()
 files_to_add = [file for file in files if os.path.basename(file) not in tracked_files]
 
 if files_to_add:
     os.system(f"dvc add {' '.join(files_to_add)}")
 else:
-    print("✅ Tous les fichiers sont déjà suivis par DVC.")
+    print("Tous les fichiers sont déjà suivis par DVC.")
 
-# ✅ Ajouter les fichiers et commit uniquement si des changements existent
+# Ajouter les fichiers et commit uniquement si des changements existent
 os.system("git add .")
 
 if os.system("git diff --cached --quiet") != 0:  # Vérifier si des modifications existent
     os.system('git commit -m "Mise à jour quotidienne des résultats DVC"')
     os.system("dvc push")  # Pousser les nouveaux fichiers vers le remote
-    print("✅ Résultats sauvegardés dans DVC.")
+    print(" Résultats sauvegardés dans DVC.")
 else:
-    print("⚠️ Aucun changement détecté, pas de commit effectué.")
+    print(" Aucun changement détecté, pas de commit effectué.")
 
 def daily_run():
     """Exécute le pipeline complet : téléchargement, calcul, optimisation et sauvegarde"""
     # 1. Téléchargement des données
-    print("📥 Téléchargement des données...")
+    print(" Téléchargement des données...")
     prices = download_data_from_dvc()
     # prices = prices.apply(pd.to_numeric, errors='coerce')
 
     print(prices)
-    print("✅ Données téléchargées avec succès !")
+    print(" Données téléchargées avec succès !")
 
     # 2. Calcul des rendements
     returns = calculate_returns(prices)
-    print("✅ Rendements calculés.")
+    print(" Rendements calculés.")
 
     # 3. Optimisation des poids et comparaison
     run_optimization(returns)

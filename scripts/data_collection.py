@@ -33,7 +33,8 @@ def fetch_data(assets, start_date, end_date, interval):
 def save_data(data, output_dir):
     """Sauvegarde les données sous format CSV et versionne avec DVC."""
     os.makedirs(output_dir, exist_ok=True)
-    file_path = os.path.join(output_dir, "market_data.csv")
+    file_path = output_dir + "/market_data.csv"
+    print(f"Chemin du fichier : {file_path}")
 
     with open(file_path, mode="w", newline="") as file:
         writer = csv.writer(file)
@@ -43,32 +44,11 @@ def save_data(data, output_dir):
 
     # Versionner avec DVC
     os.system(f"dvc add {file_path}")
-    os.system("git add data/raw/market_data.csv.dvc")
+    os.system(f"git add {file_path}.dvc")
     os.system('git commit -m "Update market data"')
-# import os
-# import pandas as pd
-# import os
-# os.chdir("C:/Users/asus/PycharmProjects/portfolio_rl_project")
-#
-# path = "data/raw/market_data.csv"
-#
-# if os.path.exists(path):
-#     print(f"✅ Le fichier {path} existe.")
-# else:
-#     print(f"❌ Le fichier {path} n'existe pas.")
-# # Lire le fichier CSV
-# df = pd.read_csv("data/raw/market_data.csv")
-#
-# # Afficher les premières lignes
-# print(df.head())
-# # Chemin absolu (modifie-le si nécessaire)
-# # data_path = "C:/Users/asus/PycharmProjects/portfolio_rl_project/data/raw/"
-#
-# # # Vérifier si le dossier existe
-# # if os.path.exists(data_path):
-# #     print(os.listdir(data_path))
-# # else:
-# #     print(f"⚠️ Le dossier '{data_path}' n'existe pas.")
-# #
-# # df = pd.read_csv("C:/Users/asus/PycharmProjects/portfolio_rl_project/data/raw/market_data.csv")
-# # print(df)
+
+    # Pousser les fichiers vers le remote DVC
+    os.system("dvc push")
+
+    # Pousser les fichiers .dvc vers GitHub
+    os.system("git push origin main")
