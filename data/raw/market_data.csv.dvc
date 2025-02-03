@@ -1,5 +1,6 @@
 outs:
-- md5: 4f78134705f7bd38f9fedc72d4c88b00
-  size: 52041
+- md5: 498b668a6e07f52ec8b22f1480158250
+  size: 52008
+  isexec: true
   hash: md5
   path: market_data.csv
